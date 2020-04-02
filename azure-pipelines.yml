@@ -24,7 +24,7 @@ steps:
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
-    versose: false
+    verbose: false
 
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
@@ -33,7 +33,7 @@ steps:
   displayName: 'Run gulp tasks'
 - script: 'echo "$(Build.DefinitionName),$(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
-  workingDirectory; Tailspin.SpaceGame.Web/wwwroot
+  workingDirectory: Tailspin.SpaceGame.Web/wwwroot
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
@@ -41,7 +41,7 @@ steps:
     command: 'Restore'
     projects: '**/*.csproj'
 
-- task: DotNetCli@2
+- task: DotNetCoreCli@2
   displayName: 'Build the project - Release'
   inputs:
     command: 'build'
